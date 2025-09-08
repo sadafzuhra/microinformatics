@@ -14,7 +14,7 @@ The microinformatics project performs data-driven investigation in a bioinformat
 * Statistical testing (ANOVA, correlations).
 * Generating reproducible reports in **RMarkdown** (HTML/PDF).
 
-The dataset includes survey responses related to participatory epidemiology of ticks and tick-borne piroplasmosis, along with zone-based data for mapping.
+
 
 ---
 
