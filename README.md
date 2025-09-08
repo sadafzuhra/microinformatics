@@ -122,10 +122,10 @@ microinformatics/
 
 ## 🙌 Acknowledgments
 
-This project was developed as part of my **Internship 2024** under the guidance of **\[Supervisor Name]**.
+This project was developed as part of my **Bioinformatice and Data Science Internship 2024** under the guidance of **\[Haseeb Raza]** in **\[Microinformatics]**.
 
 For queries or feedback:
-📧 [sadafzuhra@example.com](mailto:sadafzuhra@example.com)
+📧 [sadafzuhra788@gmail.com](mailto:sadafzuhra788@gmail.com)
 
 ---
 
@@ -135,4 +135,3 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 
 ---
 
-Do you want me to also make a **shorter, one-page internship-style README** (just overview, workflow, results, contact) in case your supervisor prefers concise reports?
