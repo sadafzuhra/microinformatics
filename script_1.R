@@ -1,0 +1,6 @@
+setRepositories()
+install.packages("readxl",dependencies = TRUE)
+library(readxl)
+installed.ptidyverseackages("tidyverse", dependencies=TRUE)
+library()
+library(ggplot2)

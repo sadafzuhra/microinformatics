@@ -1,0 +1,6 @@
+"0"," library(tidyverse)"
+"0","large_prices <- auction_data %>%"
+"0","  separate(large, sep=""-"", into=c(""min"", ""max""), convert=TRUE) %>%"
+"0","  select(date, min, max)"
+"0",""
+"0",""

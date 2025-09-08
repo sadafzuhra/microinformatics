@@ -1,0 +1,133 @@
+---
+title: "data wrangling in R"
+author: "Sadaf Zuhra"
+date: "2024-09-10"
+output: 
+  pdf_document: 
+    highlight: zenburn
+  html_document: 
+    highlight: zenburn
+    theme: journal
+---
+# Activating packages
+
+```{r required packages, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(readxl)
+library(tidyverse)
+```
+
+# Importing dataset from excel
+```{r importing_data, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(readxl)
+df <- read_excel("_Participatory Epidemiology of Ticks and Tick-Borne Piroplasmosis along with their Therapeutic and Control Measures_. (Responses).xlsx", 
+    range = "A1:BS1236", col_types = c("date", 
+        "text", "text", "text", "numeric", 
+        "text", "text", "text", "text", "text", 
+        "text", "text", "text", "text", "text", 
+        "numeric", "text", "text", "text", 
+        "text", "text", "text", "text", "text", 
+        "text", "text", "text", "text", "text", 
+        "text", "text", "text", "text", "text", 
+        "text", "text", "text", "text", "text", 
+        "text", "text", "text", "text", "text", 
+        "text", "text", "text", "text", "text", 
+        "text", "text", "text", "text", "text", 
+        "text", "text", "text", "text", "text", 
+        "text", "text", "text", "text", "text", 
+        "text", "text", "text", "text", "text", 
+        "text", "text"))
+
+```
+
+# understanding the data structure
+```{r tibble_df, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(tidyverse)
+as.tibble(df)
+#head(df)
+#tail(df)
+#glimpse(df)
+#View(df)
+#summary(df)
+```
+
+# Subsetting of data on the basis of Variable
+```{r selecting_variables, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(tidyverse)
+#df <- df[,-c(1,2,3)]
+df_1<- select(df,"Gender",
+       "Education Status",
+       "Occupation type","Socioeconomic Status",
+       "Name of District","Name of Tehsil","Living Area",
+       "Based on your observations, how would you rank the ticks in the matter of frequency",
+       "In which host you have observed ticks?",
+       "If it was animal host then select the host species in which ticks were observed",
+       "Animal Gender",
+       "Health Status of animal in which ticks are observed (select all possible)",
+       "What is your level of knowledge about ticks?",
+       "How frequently you observe the ticks?",
+       "Did you find any impact of these ticks on animal health?",
+       "What is the average number of ticks you have observed last year?",
+       "Hygienic Measures of the area (select all possible)",
+       "How frequently you have observed theileriosis in your animals?",
+       "How frequently you have observed babesiosis in animals?") 
+  
+head(df)
+
+```
+
+# renaming data columns
+```{r renaming_columns, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(tidyverse)
+df_1 <- df_1 %>% rename("gender" = "Gender",
+                "educational_status" = "Education Status" ,
+                "ocupation_types" ="Occupation type",
+                "sec"="Socioeconomic Status",
+                "dist_name"="Name of District",
+                "tehsil_name"="Name of Tehsil",
+                "living_area"="Living Area",
+                "tick_freq"= "Based on your observations, how would you rank the ticks in the matter of frequency",
+                "host_animal"= "In which host you have observed ticks?" ,
+                "host_specie"="If it was animal host then select the host species in which ticks were observed",
+                "animal_gender"="Animal Gender",
+                "host_health" = "Health Status of animal in which ticks are observed (select all possible)",
+                "knowledge" ="What is your level of knowledge about ticks?",
+                "obs_freq"= "How frequently you observe the ticks?",
+                "impact_ani_health"="Did you find any impact of these ticks on animal health?" ,
+                "ave_tick_ly"= "What is the average number of ticks you have observed last year?",
+                "hm"="Hygienic Measures of the area (select all possible)" ,
+                "theileriosis_freq" = "How frequently you have observed theileriosis in your animals?" ,
+               "babesiosis_freq" = "How frequently you have observed babesiosis in animals?") %>% print()
+
+```
+
+# recoding data columns
+```{r recode_var, message=FALSE, warning=FALSE, paged.print=FALSE}
+df_1 %>% 
+  mutate(dist_name = recode(dist_name, "Rajan pur"="Rajanpur", "Rajan 6" = "Rajanpur","faisalabad"="Faisalabad",
+                            "Fsd"="Faisalabad")) %>% 
+  drop_na(dist_name) %>% 
+  summarise(unique(dist_name)) 
+df_1 <-  df_1 %>% 
+  mutate(dist_name = recode(dist_name, "Rajan pur"="Rajanpur", "Rajan 6" = "Rajanpur","faisalabad"="Faisalabad",
+                            "Fsd"="Faisalabad")) %>% 
+  drop_na(dist_name)
+```
+
+# filtering rows
+```{r filtering_rows, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(tidyverse)
+glimpse(df_1)
+filter(df_1, dist_name=="Rajanpur"| dist_name=="Rajan pur") %>% 
+  print()
+
+filter(df_1, dist_name %in% c("Rajanpur","Rajan pur","Rajan 6")) %>% 
+  print()
+
+```
+
+
+
+
+
+
+

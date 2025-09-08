@@ -1,0 +1,4 @@
+"0","ggplot(data = mpg, aes(x=cyl, y=displ))+geom_abline(col=2)+"
+"0","  "
+"0","  geom_point(col=""blue"")+geom_smooth(se=FALSE, col=""green"")"
+"0",""

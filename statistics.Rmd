@@ -1,0 +1,156 @@
+---
+title: "Statistics in R"
+author: "Sadaf Zuhra"
+date: "2024-10-01"
+output: 
+  pdf_document: 
+    highlight: zenburn
+  html_document: 
+    highlight: zenburn
+    theme: journal
+---
+
+# relationship between Data Variables
+
+## Correlation and Correlation Matrix
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(corrplot)
+
+mpg <- mpg
+
+
+corr<- mpg %>% 
+   select(., displ, cyl, cty, hwy) %>% 
+    cor() 
+
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(corrplot)
+
+corrplot(corr, method = "number", type = "full")
+
+corrplot(corr, method = "shade", type = "full")
+
+corrplot(corr, method = "circle", type = "upper", order = "hclust", addrect = TRUE )
+
+corrplot.mixed(corr, lower = "circle", upper = "shade")
+
+```
+
+## regression
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+mod <- mpg %>%  lm( formula = displ ~ cyl)
+
+summary(mod)
+
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+plot(mod, col=2, lwd=1)
+
+par(mfrow = c(2,2))
+
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+ggplot(data = mpg, aes(x=cyl, y=displ))+geom_abline(col=2)+
+  
+  geom_point(col="blue")+geom_smooth(se=FALSE, col="green")
+
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+plot(mod, col=2, lwd=1)
+
+ggplot(data=iris, aes(x=Petal.Length, y=Petal.Width)) +
+  
+  geom_abline(col=2) + geom_point(size=3, col="blue") +
+  
+  geom_smooth(se=FALSE, col="green", span=10) + theme_classic()
+
+```
+
+## comparison between Data Variables
+
+## T-test in R 
+
+### One sample T-test 
+
+
+```{r one_sample_t , message=FALSE, warning=FALSE, paged.print=FALSE}
+# mpg <-mpg
+
+t.test(mpg$hwy , mu =23.4 )
+
+
+```
+
+
+### Two sample T-test 
+
+#### unpaired/ independent T-test 
+```{r unpaired_t_test, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+t.test(mpg$cty , mpg$hwy)
+
+```
+
+#### paired T-test 
+
+```{r paired_t, message=FALSE, warning=FALSE, paged.print=FALSE}
+pre_treatment <- rnorm(n= 2000 ,mean= 160 ,sd = 15)
+post_treatment <- rnorm(n=2000 , mean = 120 , sd = 15)
+
+```
+
+```{r paired_test, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+t.test(pre_treatment ,post_treatment , paired = TRUE)
+
+```
+
+## use of if-else command
+```{r if_command, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+if( is.numeric(mpg$hwy))
+  
+{
+  print("highway is a numeric column")
+}
+```
+
+```{r if_else, message=FALSE, warning=FALSE, paged.print=FALSE}
+if( is.numeric(mpg$manufacturer))
+  
+{
+  print("highway is a numeric column")
+}else  {
+  print("highway is not a numeric column ")
+}
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
